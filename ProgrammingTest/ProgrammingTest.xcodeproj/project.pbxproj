@@ -14,18 +14,15 @@
 		42F6A0B628F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */; };
 		42F6A0B828F492AA004BF0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42F6A0B728F492AA004BF0E6 /* Assets.xcassets */; };
 		42F6A0BB28F492AA004BF0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F6A0B928F492AA004BF0E6 /* LaunchScreen.storyboard */; };
-		42F6A0C628F492AA004BF0E6 /* ProgrammingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0C528F492AA004BF0E6 /* ProgrammingTestTests.swift */; };
+		42F6A0C628F492AA004BF0E6 /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0C528F492AA004BF0E6 /* ParsingTests.swift */; };
+		42F6A0E128F4982B004BF0E6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42F6A0E028F4982B004BF0E6 /* Alamofire */; };
+		42F6A0E728F49D73004BF0E6 /* WeatherReportJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0E628F49D73004BF0E6 /* WeatherReportJson.swift */; };
+		42F6A0E928F4AE20004BF0E6 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0E828F4AE20004BF0E6 /* WeatherService.swift */; };
+		42F6A0EC28F4C0A8004BF0E6 /* ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0EA28F4BF32004BF0E6 /* ServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		42F6A0C228F492AA004BF0E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 42F6A0A028F492A9004BF0E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 42F6A0A728F492A9004BF0E6;
-			remoteInfo = ProgrammingTest;
-		};
-		42F6A0CC28F492AA004BF0E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 42F6A0A028F492A9004BF0E6 /* Project object */;
 			proxyType = 1;
@@ -45,8 +42,10 @@
 		42F6A0BA28F492AA004BF0E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42F6A0BC28F492AA004BF0E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F6A0C128F492AA004BF0E6 /* ProgrammingTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProgrammingTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		42F6A0C528F492AA004BF0E6 /* ProgrammingTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammingTestTests.swift; sourceTree = "<group>"; };
-		42F6A0CB28F492AA004BF0E6 /* ProgrammingTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProgrammingTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F6A0C528F492AA004BF0E6 /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
+		42F6A0E628F49D73004BF0E6 /* WeatherReportJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherReportJson.swift; sourceTree = "<group>"; };
+		42F6A0E828F4AE20004BF0E6 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		42F6A0EA28F4BF32004BF0E6 /* ServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,17 +53,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F6A0E128F4982B004BF0E6 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		42F6A0BE28F492AA004BF0E6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42F6A0C828F492AA004BF0E6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -78,7 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				42F6A0AA28F492A9004BF0E6 /* ProgrammingTest */,
-				42F6A0C428F492AA004BF0E6 /* ProgrammingTestTests */,
+				42F6A0C428F492AA004BF0E6 /* UnitTests */,
 				42F6A0A928F492A9004BF0E6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,7 +81,6 @@
 			children = (
 				42F6A0A828F492A9004BF0E6 /* ProgrammingTest.app */,
 				42F6A0C128F492AA004BF0E6 /* ProgrammingTestTests.xctest */,
-				42F6A0CB28F492AA004BF0E6 /* ProgrammingTestUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,24 +88,67 @@
 		42F6A0AA28F492A9004BF0E6 /* ProgrammingTest */ = {
 			isa = PBXGroup;
 			children = (
-				42F6A0AB28F492A9004BF0E6 /* AppDelegate.swift */,
-				42F6A0AD28F492A9004BF0E6 /* SceneDelegate.swift */,
-				42F6A0AF28F492A9004BF0E6 /* ViewController.swift */,
-				42F6A0B128F492A9004BF0E6 /* Main.storyboard */,
-				42F6A0B728F492AA004BF0E6 /* Assets.xcassets */,
-				42F6A0B928F492AA004BF0E6 /* LaunchScreen.storyboard */,
+				42F6A0E328F49BCA004BF0E6 /* WeatherServices */,
+				42F6A0E228F4997C004BF0E6 /* AppConfiguration */,
+				42F6A0DE28F49640004BF0E6 /* UserInterface */,
 				42F6A0BC28F492AA004BF0E6 /* Info.plist */,
-				42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */,
+				42F6A0B728F492AA004BF0E6 /* Assets.xcassets */,
 			);
 			path = ProgrammingTest;
 			sourceTree = "<group>";
 		};
-		42F6A0C428F492AA004BF0E6 /* ProgrammingTestTests */ = {
+		42F6A0C428F492AA004BF0E6 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				42F6A0C528F492AA004BF0E6 /* ProgrammingTestTests.swift */,
+				42F6A0C528F492AA004BF0E6 /* ParsingTests.swift */,
+				42F6A0EA28F4BF32004BF0E6 /* ServiceTests.swift */,
 			);
-			path = ProgrammingTestTests;
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		42F6A0DE28F49640004BF0E6 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				42F6A0AF28F492A9004BF0E6 /* ViewController.swift */,
+				42F6A0B928F492AA004BF0E6 /* LaunchScreen.storyboard */,
+				42F6A0B128F492A9004BF0E6 /* Main.storyboard */,
+			);
+			path = UserInterface;
+			sourceTree = "<group>";
+		};
+		42F6A0E228F4997C004BF0E6 /* AppConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				42F6A0AB28F492A9004BF0E6 /* AppDelegate.swift */,
+				42F6A0AD28F492A9004BF0E6 /* SceneDelegate.swift */,
+			);
+			path = AppConfiguration;
+			sourceTree = "<group>";
+		};
+		42F6A0E328F49BCA004BF0E6 /* WeatherServices */ = {
+			isa = PBXGroup;
+			children = (
+				42F6A0E528F49D09004BF0E6 /* Restful */,
+				42F6A0E428F49CBF004BF0E6 /* Persistence */,
+			);
+			path = WeatherServices;
+			sourceTree = "<group>";
+		};
+		42F6A0E428F49CBF004BF0E6 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		42F6A0E528F49D09004BF0E6 /* Restful */ = {
+			isa = PBXGroup;
+			children = (
+				42F6A0E628F49D73004BF0E6 /* WeatherReportJson.swift */,
+				42F6A0E828F4AE20004BF0E6 /* WeatherService.swift */,
+			);
+			path = Restful;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +167,9 @@
 			dependencies = (
 			);
 			name = ProgrammingTest;
+			packageProductDependencies = (
+				42F6A0E028F4982B004BF0E6 /* Alamofire */,
+			);
 			productName = ProgrammingTest;
 			productReference = 42F6A0A828F492A9004BF0E6 /* ProgrammingTest.app */;
 			productType = "com.apple.product-type.application";
@@ -154,24 +192,6 @@
 			productReference = 42F6A0C128F492AA004BF0E6 /* ProgrammingTestTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		42F6A0CA28F492AA004BF0E6 /* ProgrammingTestUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 42F6A0DB28F492AA004BF0E6 /* Build configuration list for PBXNativeTarget "ProgrammingTestUITests" */;
-			buildPhases = (
-				42F6A0C728F492AA004BF0E6 /* Sources */,
-				42F6A0C828F492AA004BF0E6 /* Frameworks */,
-				42F6A0C928F492AA004BF0E6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				42F6A0CD28F492AA004BF0E6 /* PBXTargetDependency */,
-			);
-			name = ProgrammingTestUITests;
-			productName = ProgrammingTestUITests;
-			productReference = 42F6A0CB28F492AA004BF0E6 /* ProgrammingTestUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -189,10 +209,6 @@
 						CreatedOnToolsVersion = 14.0.1;
 						TestTargetID = 42F6A0A728F492A9004BF0E6;
 					};
-					42F6A0CA28F492AA004BF0E6 = {
-						CreatedOnToolsVersion = 14.0.1;
-						TestTargetID = 42F6A0A728F492A9004BF0E6;
-					};
 				};
 			};
 			buildConfigurationList = 42F6A0A328F492A9004BF0E6 /* Build configuration list for PBXProject "ProgrammingTest" */;
@@ -204,13 +220,15 @@
 				Base,
 			);
 			mainGroup = 42F6A09F28F492A9004BF0E6;
+			packageReferences = (
+				42F6A0DF28F4982B004BF0E6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 42F6A0A928F492A9004BF0E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				42F6A0A728F492A9004BF0E6 /* ProgrammingTest */,
 				42F6A0C028F492AA004BF0E6 /* ProgrammingTestTests */,
-				42F6A0CA28F492AA004BF0E6 /* ProgrammingTestUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,13 +251,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		42F6A0C928F492AA004BF0E6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -249,7 +260,9 @@
 			files = (
 				42F6A0B028F492A9004BF0E6 /* ViewController.swift in Sources */,
 				42F6A0AC28F492A9004BF0E6 /* AppDelegate.swift in Sources */,
+				42F6A0E728F49D73004BF0E6 /* WeatherReportJson.swift in Sources */,
 				42F6A0AE28F492A9004BF0E6 /* SceneDelegate.swift in Sources */,
+				42F6A0E928F4AE20004BF0E6 /* WeatherService.swift in Sources */,
 				42F6A0B628F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,14 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F6A0C628F492AA004BF0E6 /* ProgrammingTestTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42F6A0C728F492AA004BF0E6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				42F6A0C628F492AA004BF0E6 /* ParsingTests.swift in Sources */,
+				42F6A0EC28F4C0A8004BF0E6 /* ServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,11 +283,6 @@
 			isa = PBXTargetDependency;
 			target = 42F6A0A728F492A9004BF0E6 /* ProgrammingTest */;
 			targetProxy = 42F6A0C228F492AA004BF0E6 /* PBXContainerItemProxy */;
-		};
-		42F6A0CD28F492AA004BF0E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 42F6A0A728F492A9004BF0E6 /* ProgrammingTest */;
-			targetProxy = 42F6A0CC28F492AA004BF0E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -510,40 +512,6 @@
 			};
 			name = Release;
 		};
-		42F6A0DC28F492AA004BF0E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fall-soft.ProgrammingTestUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ProgrammingTest;
-			};
-			name = Debug;
-		};
-		42F6A0DD28F492AA004BF0E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fall-soft.ProgrammingTestUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ProgrammingTest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -574,16 +542,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42F6A0DB28F492AA004BF0E6 /* Build configuration list for PBXNativeTarget "ProgrammingTestUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				42F6A0DC28F492AA004BF0E6 /* Debug */,
-				42F6A0DD28F492AA004BF0E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42F6A0DF28F4982B004BF0E6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42F6A0E028F4982B004BF0E6 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42F6A0DF28F4982B004BF0E6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */ = {
