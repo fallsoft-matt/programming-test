@@ -75,7 +75,7 @@ internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
     }
     
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "ProgrammingTest")
+        let container = NSPersistentContainer(name: "WeatherPersistence")
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in

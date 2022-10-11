@@ -11,7 +11,7 @@
 		42F6A0AE28F492A9004BF0E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0AD28F492A9004BF0E6 /* SceneDelegate.swift */; };
 		42F6A0B028F492A9004BF0E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0AF28F492A9004BF0E6 /* ViewController.swift */; };
 		42F6A0B328F492A9004BF0E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F6A0B128F492A9004BF0E6 /* Main.storyboard */; };
-		42F6A0B628F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */; };
+		42F6A0B628F492A9004BF0E6 /* WeatherPersistence.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0B428F492A9004BF0E6 /* WeatherPersistence.xcdatamodeld */; };
 		42F6A0B828F492AA004BF0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42F6A0B728F492AA004BF0E6 /* Assets.xcassets */; };
 		42F6A0BB28F492AA004BF0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F6A0B928F492AA004BF0E6 /* LaunchScreen.storyboard */; };
 		42F6A0C628F492AA004BF0E6 /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F6A0C528F492AA004BF0E6 /* ParsingTests.swift */; };
@@ -151,7 +151,7 @@
 		42F6A0E428F49CBF004BF0E6 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */,
+				42F6A0B428F492A9004BF0E6 /* WeatherPersistence.xcdatamodeld */,
 				42F6A0F628F58785004BF0E6 /* WeatherPersistence.swift */,
 				42F6A0ED28F4C2D4004BF0E6 /* CoreWeatherPersistence.swift */,
 				42F6A0EF28F4EF54004BF0E6 /* TerminalWeatherService.swift */,
@@ -285,7 +285,7 @@
 				42F6A0F528F58061004BF0E6 /* PersistenceErrors.swift in Sources */,
 				42F6A0AE28F492A9004BF0E6 /* SceneDelegate.swift in Sources */,
 				42F6A0E928F4AE20004BF0E6 /* WeatherJsonService.swift in Sources */,
-				42F6A0B628F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld in Sources */,
+				42F6A0B628F492A9004BF0E6 /* WeatherPersistence.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,13 +588,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		42F6A0B428F492A9004BF0E6 /* ProgrammingTest.xcdatamodeld */ = {
+		42F6A0B428F492A9004BF0E6 /* WeatherPersistence.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				42F6A0B528F492A9004BF0E6 /* ProgrammingTest.xcdatamodel */,
 			);
 			currentVersion = 42F6A0B528F492A9004BF0E6 /* ProgrammingTest.xcdatamodel */;
-			path = ProgrammingTest.xcdatamodeld;
+			path = WeatherPersistence.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
