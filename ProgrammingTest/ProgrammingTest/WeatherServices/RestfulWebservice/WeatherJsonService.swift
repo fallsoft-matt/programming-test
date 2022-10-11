@@ -10,17 +10,17 @@ import Alamofire
 import Combine
 
 /**
- A service that
+ A service that fetches from weather data for a given airport
  */
 internal class WeatherService {
 
     internal static let shared = WeatherService()
     
-    internal func getWeather(identifier: String) async throws -> TerminalWeatherInformation {
+    internal func getWeather(identifier: String) async throws -> TerminalWeatherInformationModel {
         let url = urlRoute + identifier
         
         return try await session.request(url, headers: headers).validate()
-            .serializingDecodable(TerminalWeatherInformation.self)
+            .serializingDecodable(TerminalWeatherInformationModel.self)
             .result
             .get()
     }

@@ -7,16 +7,15 @@
 
 import Foundation
 
-
-struct TerminalWeatherInformation: Codable {
-    let report: WeatherReport
+internal struct TerminalWeatherInformationModel: Codable {
+    let report: WeatherReportModel
 }
 
-struct WeatherReport: Codable {
-    let conditions: WeatherConditions
+internal struct WeatherReportModel: Codable {
+    let conditions: WeatherConditionsModel
 }
 
-struct WeatherConditions: Codable {
+internal struct WeatherConditionsModel: Codable {
     let text: String
     let ident: String
     let dateIssued: String
@@ -32,7 +31,6 @@ struct WeatherConditions: Codable {
     let relativeHumidity: Double
     let flightRules: String
 }
-
 
 /**
  

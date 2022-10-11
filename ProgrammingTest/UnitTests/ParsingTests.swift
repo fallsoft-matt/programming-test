@@ -23,7 +23,7 @@ final class ParsingTests: XCTestCase {
     func testWeatherInfoParsing() throws {
         
         do {
-            let _ = try jsonDecoder.decode(TerminalWeatherInformation.self, from: weatherReportTestInput)
+            let _ = try jsonDecoder.decode(TerminalWeatherInformationModel.self, from: weatherReportTestInput)
         } catch {
             XCTFail()
         }
@@ -33,7 +33,7 @@ final class ParsingTests: XCTestCase {
     func testWeatherConditionParsing() throws {
         
         do {
-            let _ = try jsonDecoder.decode(WeatherConditions.self, from: weatherConditionsTestInput)
+            let _ = try jsonDecoder.decode(WeatherConditionsModel.self, from: weatherConditionsTestInput)
         } catch {
             XCTFail()
         }
