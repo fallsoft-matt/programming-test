@@ -1,5 +1,7 @@
 # Weather Report (Programming Test)
 
+To build the full project, feel free to checkout the 'feature/persistence' branch
+
 ## Time Spent
 I started this project on Monday morning and spent about 16 hours coding 
 
