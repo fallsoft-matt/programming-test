@@ -12,7 +12,7 @@ Instead of building something quickly by storing the Data as JSON, I went with a
 
 Additionally, I built out the "Weather Services" folder as if it were a seperate library, using appropriate access control (public, internal private). The async service class is probably a little overkill for a project this small, but it is definitely something I'd want for a larger codebase. 
 
-For a larger project, I'd also have the networking done in such a way as to abstract away Alamofire (and the network code would also go in a seperate library).
+For a larger project, I'd also have the networking done in such a way as to abstract away Alamofire (and the network code would also go in a seperate library). 
 
 ## References and Third Party Libraries
 
@@ -36,7 +36,9 @@ A few issues I'd like to to highlight:
 
 3. I decided against using / displaying cloud information (as well as a few other data points) strictly in the interest of time 
 
-## Closing
-This was a super fun test to knock out; I greatly enjoyed looking at the raw data from various airports I frequent (KORL, KRQB).
+## Closing 
+This was a super fun test to knock out; I greatly enjoyed looking at the raw data from various airports I frequent (KORL, KRQB). 
 
 I also wanted to say that the JSON object returned from the endpoint seemed really well designed, so I wanted to give a shout out to whoever had a hand in that. 
+
+PS. While running the project, I recommend trying the Swipe to delete feature on the list of Airports. 
