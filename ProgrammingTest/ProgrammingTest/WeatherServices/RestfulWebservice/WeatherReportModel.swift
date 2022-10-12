@@ -42,8 +42,8 @@ internal struct Visibility: Codable {
 
 internal struct Wind: Codable {
     let speedKts: Double
-    let direction: Double
-    let from: Double
+    let direction: Double?
+    let from: Double?
     let variable: Bool
 }
 

@@ -67,10 +67,15 @@ class WeatherDetailViewController: UIViewController {
         flightRules.text = report.flightRules
         visibility.text = report.visibility
         prevailingVisibility.text = report.prevailingVisibility
-        windSpeed.text = report.windSpeed.formatted(decimalFormat)
         windDirection.text = report.windDirection.formatted(decimalFormat)
         windFrom.text = report.windFrom.formatted(decimalFormat)
+        windSpeed.text = report.windSpeed.formatted(decimalFormat)
         windVariable.text = report.windVariable ? "YES" : "NO"
+        
+        if report.windVariable {
+            windDirection.text = "-"
+            windFrom.text = "-"
+        }
     }
     
     private func updateForecast(with report: WeatherReport) {
@@ -83,6 +88,11 @@ class WeatherDetailViewController: UIViewController {
         windDirection.text = report.forecastWindDirection.formatted(decimalFormat)
         windFrom.text = report.forecastWindFrom.formatted(decimalFormat)
         windVariable.text = report.forecastWindVariable ? "YES" : "NO"
+        
+        if report.forecastWindVariable {
+            windDirection.text = "-"
+            windFrom.text = "-"
+        }
     }
     
     private func forecastTimeRange(from report: WeatherReport) -> String {

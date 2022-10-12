@@ -187,8 +187,8 @@ internal extension Weather {
             visibility: "\(conditions.visibility.distanceSm) sm",
             prevailingVisibility: "\(conditions.visibility.prevailingVisSm) sm",
             windSpeed: conditions.wind.speedKts,
-            windDirection: conditions.wind.direction,
-            windFrom: conditions.wind.direction,
+            windDirection: conditions.wind.direction ?? 0,
+            windFrom: conditions.wind.direction ?? 0,
             windVariable: conditions.wind.variable,
             forecastDateFrom: forecast.period.dateStart,
             forecastDateTo: forecast.period.dateEnd,
@@ -197,8 +197,8 @@ internal extension Weather {
             forecastVisibility: "\(forecastConditions.visibility.distanceSm) sm",
             forecastPrevailingVisibility: "\(forecastConditions.visibility.prevailingVisSm) sm",
             forecastWindSpeed: forecastConditions.wind.speedKts,
-            forecastWindDirection: forecastConditions.wind.direction,
-            forecastWindFrom: forecastConditions.wind.from,
+            forecastWindDirection: forecastConditions.wind.direction ?? 0,
+            forecastWindFrom: forecastConditions.wind.from ?? 0,
             forecastWindVariable: forecastConditions.wind.variable)
         
         return weather

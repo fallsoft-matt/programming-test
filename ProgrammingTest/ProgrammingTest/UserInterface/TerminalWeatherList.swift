@@ -97,6 +97,7 @@ class TerminalWeatherList: UIViewController {
                 performSegue(withIdentifier: "show-detail", sender: result.ident)
                 
             } catch {
+                print("Recieved Error while adding airport: \(error)")
                 self?.showError(message: "We're unable to add that airport at this time")
             }
         }
