@@ -8,35 +8,51 @@
 import Foundation
 import CoreData
 
+/*
+ 
+ Many of these classes and structs would either be internal to the Library or completely private
+ */
+
 /**
  An implementation of our persistence adapter using CoreData
  */
 internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
     
-    internal func createWeatherConditions(from conditions: WeatherReport) -> WeatherReport {
+    internal func createWeatherConditions(from conditions: WeatherReport) throws -> WeatherReport {
         
-        return persistentContainer.viewContext.performAndWait {
+        return try persistentContainer.viewContext.performAndWait {
             let weather = WeatherConditions(context: persistentContainer.viewContext)
             weather.ident = conditions.ident
-            weather.dateIssued = conditions.dateIssued
-            weather.densityAltitudeFt = conditions.densityAltitudeFt
-            weather.flightRules = conditions.flightRules
-            weather.elevationFt = conditions.elevationFt
-            weather.lat = conditions.lat
-            weather.lon = conditions.lon
+            weather.update(from: conditions)
             
-            return WeatherConditionsModel.fromCoreData(object: weather)
+            try persistentContainer.viewContext.save()
+            
+            return Weather.fromCoreData(object: weather)
         }
     }
     
+    internal func updateWeatherConditions(from conditions: WeatherReport) throws -> WeatherReport {
+        
+        return try persistentContainer.viewContext.performAndWait {
+            
+            guard let result: WeatherConditions = try fetch(identifier: conditions.ident) else {
+                throw PersistenceError.objectNotFound
+            }
+            result.update(from: conditions)
+            try persistentContainer.viewContext.save()
+            return Weather.fromCoreData(object: result)
+        }
+    }
+
+    
     internal func fetchAll() throws -> [WeatherReport] {
         let results: [WeatherConditions] = try fetchAll()
-        return results.map(WeatherConditionsModel.fromCoreData)
+        return results.map(Weather.fromCoreData)
     }
     
     internal func fetch(identifier: String) throws -> WeatherReport? {
         let result: WeatherConditions? = try fetch(identifier: identifier)
-        return result.map(WeatherConditionsModel.fromCoreData)
+        return result.map(Weather.fromCoreData)
     }
     
     @discardableResult
@@ -46,8 +62,8 @@ internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
             throw PersistenceError.objectNotFound
         }
         
-        let report = WeatherConditionsModel.fromCoreData(object: result)
-        delete(object: result)
+        let report = Weather.fromCoreData(object: result)
+        try delete(object: result)
         return report
     }
     
@@ -59,9 +75,10 @@ internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
         }
     }
     
-    private func delete(object: WeatherConditions) {
-        persistentContainer.viewContext.performAndWait {
+    private func delete(object: WeatherConditions) throws {
+        try persistentContainer.viewContext.performAndWait {
             persistentContainer.viewContext.delete(object)
+            try persistentContainer.viewContext.save()
         }
     }
     
@@ -95,8 +112,6 @@ internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -104,23 +119,89 @@ internal class CoreDataWeatherPersistence: WeatherPersistenceAdapter {
     }
 }
 
-fileprivate extension WeatherReport {
-    static func fromCoreData(object: WeatherConditions) -> WeatherReport {
-        
-        return WeatherConditionsModel(
-            text: "",
-            ident: object.ident ?? "",
-            dateIssued: object.dateIssued ?? "",
-            lat: object.lat,
-            lon: object.lon,
-            elevationFt: object.elevationFt,
-            tempC: 0.0, // TODO: Detail
-            dewpointC: 0.0,
-            pressureHg: 0.0,
-            pressureHpa: 0.0,
-            reportedAsHpa: false,
-            densityAltitudeFt: object.densityAltitudeFt,
-            relativeHumidity: 0.0,
-            flightRules: object.flightRules ?? "")
+// MARK: Glue Code - I've left these here since they only really have context in this file
+
+fileprivate extension WeatherConditions {
+    func update(from object: WeatherReport) {
+        dateIssued = object.dateIssued
+        elevationFt = object.elevationFt
+        flightRules = object.flightRules
+        visibility = object.visibility
+        prevailingVisibility = object.prevailingVisibility
+        windSpeed = object.windSpeed
+        windDirection = object.windDirection
+        windFrom = object.windFrom
+        windVariable = object.windVariable
+        forecastDateFrom = object.forecastDateFrom
+        forecastDateTo = object.forecastDateTo
+        forecastElevationFt = object.forecastElevationFt
+        forecastFlightRules = object.forecastFlightRules
+        forecastVisibility = object.forecastVisibility
+        forecastPrevailingVisibility = object.forecastPrevailingVisibility
+        forecastWindSpeed = object.forecastWindSpeed
+        forecastWindDirection = object.forecastWindDirection
+        forecastWindFrom = object.forecastWindFrom
+        forecastWindVariable = object.forecastWindVariable
     }
 }
+
+fileprivate extension WeatherReport {
+    static func fromCoreData(object: WeatherConditions) -> WeatherReport {
+        let defaultValue = "-"
+        
+        return Weather(
+            ident: object.ident ?? defaultValue,
+            dateIssued: object.dateIssued ?? defaultValue,
+            elevationFt: object.elevationFt,
+            flightRules: object.flightRules ?? defaultValue,
+            visibility: object.visibility ?? defaultValue,
+            prevailingVisibility: object.prevailingVisibility ?? defaultValue,
+            windSpeed: object.windSpeed,
+            windDirection: object.windDirection,
+            windFrom: object.windFrom,
+            windVariable: object.windVariable,
+            forecastDateFrom: object.forecastDateFrom ?? defaultValue,
+            forecastDateTo: object.forecastDateTo ?? defaultValue,
+            forecastElevationFt: object.forecastElevationFt,
+            forecastFlightRules: object.forecastFlightRules ?? defaultValue,
+            forecastVisibility: object.forecastVisibility ?? defaultValue,
+            forecastPrevailingVisibility: object.forecastPrevailingVisibility ?? defaultValue,
+            forecastWindSpeed: object.forecastWindSpeed,
+            forecastWindDirection: object.forecastWindDirection,
+            forecastWindFrom: object.forecastWindFrom,
+            forecastWindVariable: object.forecastWindVariable)
+    }
+}
+
+internal extension Weather {
+    static func fromJsonData(model: WeatherReportModel) -> WeatherReport {
+        let conditions = model.conditions
+        let forecast = model.forecast
+        let forecastConditions = forecast.conditions.first!
+        
+        let weather = Weather.init(
+            ident: conditions.ident,
+            dateIssued: conditions.dateIssued,
+            elevationFt: conditions.elevationFt,
+            flightRules: conditions.flightRules,
+            visibility: "\(conditions.visibility.distanceSm) sm",
+            prevailingVisibility: "\(conditions.visibility.prevailingVisSm) sm",
+            windSpeed: conditions.wind.speedKts,
+            windDirection: conditions.wind.direction,
+            windFrom: conditions.wind.direction,
+            windVariable: conditions.wind.variable,
+            forecastDateFrom: forecast.period.dateStart,
+            forecastDateTo: forecast.period.dateEnd,
+            forecastElevationFt: forecastConditions.elevationFt,
+            forecastFlightRules: forecastConditions.flightRules,
+            forecastVisibility: "\(forecastConditions.visibility.distanceSm) sm",
+            forecastPrevailingVisibility: "\(forecastConditions.visibility.prevailingVisSm) sm",
+            forecastWindSpeed: forecastConditions.wind.speedKts,
+            forecastWindDirection: forecastConditions.wind.direction,
+            forecastWindFrom: forecastConditions.wind.from,
+            forecastWindVariable: forecastConditions.wind.variable)
+        
+        return weather
+    }
+}
+

@@ -7,6 +7,12 @@
 
 import Foundation
 
+/*
+ 
+ Think of these protocols and structs and being the "Public API" of a Library
+ 
+ */
+
 /// Abstracts placing weather objects into and out of the whatever persistence layer is decided
 public protocol WeatherPersistenceAdapter {
     /**
@@ -16,7 +22,15 @@ public protocol WeatherPersistenceAdapter {
     - Parameter conditions: The new weather report to convert and save
     - Returns:A copy of the newly created object
      */
-    func createWeatherConditions(from conditions: WeatherReport) -> WeatherReport
+    func createWeatherConditions(from conditions: WeatherReport) throws -> WeatherReport
+    
+    /**
+        Updates a single weather report and saves it
+     
+        - Parameter conditions: The weather report to update / save
+        - Returns: A copy of the object that was just saved
+     */
+    func updateWeatherConditions(from conditions: WeatherReport) throws -> WeatherReport
     
     /**
      Retrieve all items from storage
@@ -40,6 +54,12 @@ public protocol WeatherPersistenceAdapter {
       - Returns: The weather report, or nil if the report is not found
      */
     func fetch(identifier: String) throws -> WeatherReport?
+    
+    /**
+    Saves the state of the data layer
+     */
+    
+    func saveContext()
 }
 
 /**
@@ -49,26 +69,100 @@ public protocol WeatherPersistenceAdapter {
  */
 public protocol AsyncWeatherService {
     
+    /**
+        Asyncronously create a new airport from the remote server, stores on device
+     - Parameter identifier: The four letter ID for the airport
+     - Returns: The newly created airport
+     */
     func create(identifier: String) async throws -> WeatherReport
+    
+    /**
+        Asyncronously updates an airport from the newest remote data, then updates the local device
+     - Parameter identifier: The four letter ID for the airport
+     - Returns: The newly updated airport
+     */
+    func update(identifier: String) async throws -> WeatherReport
+    
+    /**
+        Fetches single report on device for the given airport
+     - Parameter identifier: The four letter ID for the airport
+     - Returns: The retrieved airport, if available
+     */
     func fetchOne(identifier: String) async throws -> WeatherReport?
+    
+    /**
+        Fetches all reports saved on device
+     - Returns: The list of airports
+     */
     func fetchAll() async throws -> [WeatherReport]
     
+    /**
+        Deletes a report from the local database
+     - Parameter identifier: The four letter ID for the airport
+     - Returns: The report that has been deleted
+     */
     @discardableResult
     func delete(identifier: String) async throws -> WeatherReport
+    
+    /**
+       Persists any remaining context changes
+     */
+    func saveContext()
 }
 
-/// An protocol for representing a weather report
+/// A protocol for abstracting a weather report
 public protocol WeatherReport {
     
     var ident: String { get }
     var dateIssued: String { get }
-    var lat: Double { get }
-    var lon: Double { get }
     var elevationFt: Double { get }
-    var densityAltitudeFt: Double { get }
     var flightRules: String { get }
+   
+    var visibility: String { get }
+    var prevailingVisibility: String  { get }
+    
+    var windSpeed: Double  { get }
+    var windDirection: Double  { get }
+    var windFrom: Double  { get }
+    var windVariable: Bool  { get }
+    
+    var forecastDateFrom: String  { get }
+    var forecastDateTo: String  { get }
+    var forecastElevationFt: Double  { get }
+    var forecastFlightRules: String  { get }
+    var forecastVisibility: String  { get }
+    var forecastPrevailingVisibility: String  { get }
+    var forecastWindSpeed: Double  { get }
+    var forecastWindDirection: Double  { get }
+    var forecastWindFrom: Double  { get }
+    var forecastWindVariable: Bool  { get }
 }
 
-// Note: Using these JSON models here is just for brevity
-// Normally we'd probably not use them directly as our implementation like we are here
-extension WeatherConditionsModel: WeatherReport { }
+/// A simple struct for holding fields
+internal struct Weather: WeatherReport {
+    
+    public let ident: String
+    public let dateIssued: String
+    public let elevationFt: Double
+    public let flightRules: String
+    
+    public let visibility: String
+    public let prevailingVisibility: String
+    
+    public let windSpeed: Double
+    public let windDirection: Double
+    public let windFrom: Double
+    public let windVariable: Bool
+    
+    public let forecastDateFrom: String
+    public let forecastDateTo: String
+    public let forecastElevationFt: Double
+    public let forecastFlightRules: String
+    public let forecastVisibility: String
+    public let forecastPrevailingVisibility: String
+    public let forecastWindSpeed: Double
+    public let forecastWindDirection: Double
+    public let forecastWindFrom: Double
+    public let forecastWindVariable: Bool
+}
+

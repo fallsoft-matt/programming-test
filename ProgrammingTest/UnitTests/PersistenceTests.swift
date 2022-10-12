@@ -9,22 +9,7 @@ import XCTest
 final class PersistenceTests: XCTestCase {
     
     let persistence = CoreDataWeatherPersistence()
-    let jsonWeather = WeatherConditionsModel(
-        text: "KPWM 091457Z 0915/1012 26010G20KT P6SM FEW050 BKN250 FM092100 29005KT P6SM SKC",
-        ident: "KPWM",
-        dateIssued: "2022-10-09T14:57:00+0000",
-        lat: 43.64564406983302,
-        lon: -70.30861611249378,
-        elevationFt: 76.0,
-        tempC: 12.0,
-        dewpointC: 3.0,
-        pressureHg: 30.0,
-        pressureHpa: 1015.959,
-        reportedAsHpa: false,
-        densityAltitudeFt: -240,
-        relativeHumidity: 54,
-        flightRules: "vfr")
-    
+        
     override func setUpWithError() throws {
         
     }
@@ -47,7 +32,7 @@ final class PersistenceTests: XCTestCase {
     
     func testSaveOneItem() {
         do {
-            let _ = persistence.createWeatherConditions(from: jsonWeather)
+            let _ = try persistence.createWeatherConditions(from: jsonWeather1)
             
             let count = try persistence.fetchAll().count
             
@@ -59,9 +44,26 @@ final class PersistenceTests: XCTestCase {
         }
     }
     
+    func testSaveMultipleItems() {
+        do {
+            
+            let _ = try persistence.createWeatherConditions(from: jsonWeather1)
+            let _ = try persistence.createWeatherConditions(from: jsonWeather2)
+            let _ = try persistence.createWeatherConditions(from: jsonWeather3)
+            
+            let count = try persistence.fetchAll().count
+            
+            try persistence.fetchAll().forEach { print($0.ident) }
+            
+            XCTAssertEqual(count, 3)
+        } catch {
+            XCTFail("Error testing persistence")
+        }
+    }
+    
     func testSaveDeleteOneItem() {
         do {
-            let result = persistence.createWeatherConditions(from: jsonWeather)
+            let result = try persistence.createWeatherConditions(from: jsonWeather1)
             try persistence.delete(identifier: result.ident)
             
             let count = try persistence.fetchAll().count
@@ -76,12 +78,24 @@ final class PersistenceTests: XCTestCase {
     
     func testSaveFetchOneItem() {
         do {
-            let _ = persistence.createWeatherConditions(from: jsonWeather)
+            let _ = try persistence.createWeatherConditions(from: jsonWeather1)
             let result = try persistence.fetch(identifier: "KPWM")
                         
             XCTAssertNotNil(result)
         } catch {
             XCTFail("Error testing persistence")
         }
+    }
+    
+    lazy var jsonWeather1 = Weather.empty("KPWM")
+    
+    lazy var jsonWeather2 = Weather.empty("KAUS")
+    
+    lazy var jsonWeather3 = Weather.empty("KORL")
+}
+
+fileprivate extension Weather {
+    static func empty(_ ident: String = "KORL") -> Weather {
+        return Weather(ident: ident, dateIssued: "", elevationFt: 0, flightRules: "", visibility: "", prevailingVisibility: "", windSpeed: 0, windDirection: 0, windFrom: 0, windVariable: false, forecastDateFrom: "", forecastDateTo: "", forecastElevationFt: 0, forecastFlightRules: "", forecastVisibility: "", forecastPrevailingVisibility: "", forecastWindSpeed: 0, forecastWindDirection: 0, forecastWindFrom: 0, forecastWindVariable: false)
     }
 }

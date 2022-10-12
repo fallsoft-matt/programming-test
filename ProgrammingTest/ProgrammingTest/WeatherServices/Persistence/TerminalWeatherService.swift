@@ -9,26 +9,56 @@ import Foundation
 import Combine
 
 /**
- 
+ This class facilitates communication between the remote and local storage
+ Since we are not making remote changes, this class can only really do so for a single API call (during create)
  */
 public class TerminalWeatherService: AsyncWeatherService {
-    
+        
     public func create(identifier: String) async throws -> WeatherReport {
         
         let jsonResponse = try await WeatherService.shared.getWeather(identifier: identifier)
+        let weatherReport = Weather.fromJsonData(model: jsonResponse.report)
         
         let result = Future<WeatherReport, Error> { [weak self] promise in
             
             self?.operationQueue.addOperation {
                 
-                guard let strongSelf = self else {
-                    promise(.failure(PersistenceError.nilWeakReference))
-                    return
+                do {
+                    guard let strongSelf = self else {
+                        throw PersistenceError.nilWeakReference
+                    }
+                    
+                    let report = try strongSelf.persistence.createWeatherConditions(from: weatherReport)
+                    
+                    promise(.success(report))
+                } catch {
+                    promise(.failure(error))
                 }
+            }
+        }
+        
+        return try await result.value
+    }
+    
+    public func update(identifier: String) async throws -> WeatherReport {
+        let jsonResponse = try await WeatherService.shared.getWeather(identifier: identifier)
+        let weatherReport = Weather.fromJsonData(model: jsonResponse.report)
+        
+        let result = Future<WeatherReport, Error> { [weak self] promise in
+            
+            self?.operationQueue.addOperation {
                 
-                let report = strongSelf.persistence.createWeatherConditions(from: jsonResponse.report.conditions)
-                
-                promise(.success(report))
+                do {
+                    guard let strongSelf = self else {
+                        throw PersistenceError.nilWeakReference
+                    }
+                    
+                    let report = try strongSelf.persistence.updateWeatherConditions(from: weatherReport)
+                    
+                    promise(.success(report))
+                } catch {
+                    promise(.failure(error))
+                }
             }
         }
         
@@ -107,6 +137,9 @@ public class TerminalWeatherService: AsyncWeatherService {
         }
     }
 
+    public func saveContext() {
+        persistence.saveContext()
+    }
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()

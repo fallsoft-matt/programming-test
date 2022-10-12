@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A class for throwing Persistence Specific Errors
 public struct PersistenceError: Error {
     let description: String
     let cause: Error?
