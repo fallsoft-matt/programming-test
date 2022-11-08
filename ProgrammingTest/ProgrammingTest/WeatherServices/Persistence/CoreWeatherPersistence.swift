@@ -148,28 +148,32 @@ fileprivate extension WeatherConditions {
 fileprivate extension WeatherReport {
     static func fromCoreData(object: WeatherConditions) -> WeatherReport {
         let defaultValue = "-"
+        let result = object.managedObjectContext?.performAndWait {
+            
+            return Weather(
+                ident: object.ident ?? defaultValue,
+                dateIssued: object.dateIssued ?? defaultValue,
+                elevationFt: object.elevationFt,
+                flightRules: object.flightRules ?? defaultValue,
+                visibility: object.visibility ?? defaultValue,
+                prevailingVisibility: object.prevailingVisibility ?? defaultValue,
+                windSpeed: object.windSpeed,
+                windDirection: object.windDirection,
+                windFrom: object.windFrom,
+                windVariable: object.windVariable,
+                forecastDateFrom: object.forecastDateFrom ?? defaultValue,
+                forecastDateTo: object.forecastDateTo ?? defaultValue,
+                forecastElevationFt: object.forecastElevationFt,
+                forecastFlightRules: object.forecastFlightRules ?? defaultValue,
+                forecastVisibility: object.forecastVisibility ?? defaultValue,
+                forecastPrevailingVisibility: object.forecastPrevailingVisibility ?? defaultValue,
+                forecastWindSpeed: object.forecastWindSpeed,
+                forecastWindDirection: object.forecastWindDirection,
+                forecastWindFrom: object.forecastWindFrom,
+                forecastWindVariable: object.forecastWindVariable)
+        }
         
-        return Weather(
-            ident: object.ident ?? defaultValue,
-            dateIssued: object.dateIssued ?? defaultValue,
-            elevationFt: object.elevationFt,
-            flightRules: object.flightRules ?? defaultValue,
-            visibility: object.visibility ?? defaultValue,
-            prevailingVisibility: object.prevailingVisibility ?? defaultValue,
-            windSpeed: object.windSpeed,
-            windDirection: object.windDirection,
-            windFrom: object.windFrom,
-            windVariable: object.windVariable,
-            forecastDateFrom: object.forecastDateFrom ?? defaultValue,
-            forecastDateTo: object.forecastDateTo ?? defaultValue,
-            forecastElevationFt: object.forecastElevationFt,
-            forecastFlightRules: object.forecastFlightRules ?? defaultValue,
-            forecastVisibility: object.forecastVisibility ?? defaultValue,
-            forecastPrevailingVisibility: object.forecastPrevailingVisibility ?? defaultValue,
-            forecastWindSpeed: object.forecastWindSpeed,
-            forecastWindDirection: object.forecastWindDirection,
-            forecastWindFrom: object.forecastWindFrom,
-            forecastWindVariable: object.forecastWindVariable)
+        return result!
     }
 }
 
