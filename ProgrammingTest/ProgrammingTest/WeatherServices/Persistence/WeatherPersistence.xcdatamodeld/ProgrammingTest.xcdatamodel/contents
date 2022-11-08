@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="WeatherConditions" representedClassName="WeatherConditions" syncable="YES" codeGenerationType="class">
+        <attribute name="dateIssued" optional="YES" attributeType="String"/>
+        <attribute name="elevationFt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="flightRules" optional="YES" attributeType="String"/>
+        <attribute name="forecastDateFrom" optional="YES" attributeType="String"/>
+        <attribute name="forecastDateTo" optional="YES" attributeType="String"/>
+        <attribute name="forecastElevationFt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="forecastFlightRules" optional="YES" attributeType="String"/>
+        <attribute name="forecastPrevailingVisibility" optional="YES" attributeType="String"/>
+        <attribute name="forecastVisibility" optional="YES" attributeType="String"/>
+        <attribute name="forecastWindDirection" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="forecastWindFrom" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="forecastWindSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="forecastWindVariable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="ident" optional="YES" attributeType="String"/>
+        <attribute name="prevailingVisibility" optional="YES" attributeType="String"/>
+        <attribute name="visibility" optional="YES" attributeType="String"/>
+        <attribute name="windDirection" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windFrom" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windVariable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="ident"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>

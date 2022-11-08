@@ -23,9 +23,9 @@ final class ParsingTests: XCTestCase {
     func testWeatherInfoParsing() throws {
         
         do {
-            let _ = try jsonDecoder.decode(TerminalWeatherInformation.self, from: weatherReportTestInput)
+            let _ = try jsonDecoder.decode(TerminalWeatherInformationModel.self, from: weatherReportTestInput)
         } catch {
-            XCTFail()
+            XCTFail("Unable to parse json object \(error)")
         }
         
     }
@@ -33,19 +33,11 @@ final class ParsingTests: XCTestCase {
     func testWeatherConditionParsing() throws {
         
         do {
-            let _ = try jsonDecoder.decode(WeatherConditions.self, from: weatherConditionsTestInput)
+            let _ = try jsonDecoder.decode(WeatherConditionsModel.self, from: weatherConditionsTestInput)
         } catch {
-            XCTFail()
+            XCTFail("Unable to parse json object \(error)")
         }
         
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
@@ -54,20 +46,133 @@ fileprivate let weatherReportTestInput = """
 {
     "report": {
         "conditions": {
-            "text": "KPWM 091551Z 28012KT 10SM SCT060 SCT200 12/03 A3000 RMK AO2 SLP158 T01170028",
-            "ident": "kpwm",
-            "dateIssued": "2022-10-09T15:51:00+0000",
-            "lat": 43.64564406983302,
-            "lon": -70.30861611249378,
-            "elevationFt": 76.0,
-            "tempC": 12.0,
-            "dewpointC": 3.0,
-            "pressureHg": 30.0,
-            "pressureHpa": 1015.959,
+            "text": "METAR KORL 111953Z AUTO 04007KT 10SM FEW040 SCT048 31/21 A3009 RMK AO2 SLP192 T03060211",
+            "ident": "korl",
+            "dateIssued": "2022-10-11T19:53:00+0000",
+            "lat": 28.545462045672732,
+            "lon": -81.33293013013267,
+            "elevationFt": 113.0,
+            "tempC": 31.0,
+            "dewpointC": 21.0,
+            "pressureHg": 30.09,
+            "pressureHpa": 1019.0068769999999,
             "reportedAsHpa": false,
-            "densityAltitudeFt": -240,
-            "relativeHumidity": 54,
+            "densityAltitudeFt": 2113,
+            "relativeHumidity": 55,
+            "autonomous": true,
             "flightRules": "vfr",
+            "cloudLayers": [
+                {
+                    "coverage": "few",
+                    "altitudeFt": 4000.0,
+                    "ceiling": false
+                },
+                {
+                    "coverage": "sct",
+                    "altitudeFt": 4800.0,
+                    "ceiling": false
+                }
+            ],
+            "cloudLayersV2": [
+                {
+                    "coverage": "few",
+                    "altitudeFt": 4000.0,
+                    "ceiling": false
+                },
+                {
+                    "coverage": "sct",
+                    "altitudeFt": 4800.0,
+                    "ceiling": false
+                }
+            ],
+            "weather": [],
+            "visibility": {
+                "distanceSm": 10.0,
+                "prevailingVisSm": 10.0
+            },
+            "wind": {
+                "speedKts": 7.0,
+                "direction": 40,
+                "from": 40,
+                "variable": false
+            },
+            "remarks": {
+                "precipitationDiscriminator": true,
+                "humanObserver": false,
+                "seaLevelPressure": 1019.2,
+                "temperature": 30.6,
+                "dewpoint": 21.1,
+                "visibility": {},
+                "sensoryStatus": [],
+                "lightning": [],
+                "weatherBeginEnds": {},
+                "clouds": [],
+                "obscuringLayers": []
+            }
+        },
+        "forecast": {
+            "text": "KMCO 111739Z 1118/1224 06008KT P6SM SCT030 BKN300 FM112100 06009KT P6SM VCTS SCT035CB BKN060 FM120000 05004KT P6SM SCT025 SCT050 BKN200 FM121400 12004KT P6SM SCT025 BKN200 FM121900 11006KT P6SM VCTS SCT035CB BKN050",
+            "ident": "kmco",
+            "dateIssued": "2022-10-11T17:39:00+0000",
+            "period": {
+                "dateStart": "2022-10-11T18:00:00+0000",
+                "dateEnd": "2022-10-13T00:00:00+0000"
+            },
+            "lat": 28.429389045487017,
+            "lon": -81.30900013009438,
+            "elevationFt": 96.0,
+            "conditions": [
+                {
+                    "text": "111739Z 1118/1224 06008KT P6SM SCT030 BKN300",
+                    "dateIssued": "2022-10-11T17:39:00+0000",
+                    "lat": 28.429389045487017,
+                    "lon": -81.30900013009438,
+                    "elevationFt": 96.0,
+                    "relativeHumidity": 100,
+                    "flightRules": "vfr",
+                    "cloudLayers": [
+                        {
+                            "coverage": "sct",
+                            "altitudeFt": 3000.0,
+                            "ceiling": false
+                        },
+                        {
+                            "coverage": "bkn",
+                            "altitudeFt": 30000.0,
+                            "ceiling": true
+                        }
+                    ],
+                    "cloudLayersV2": [
+                        {
+                            "coverage": "sct",
+                            "altitudeFt": 3000.0,
+                            "ceiling": false
+                        },
+                        {
+                            "coverage": "bkn",
+                            "altitudeFt": 30000.0,
+                            "ceiling": true
+                        }
+                    ],
+                    "weather": [],
+                    "visibility": {
+                        "distanceSm": 6.0,
+                        "distanceQualifier": 1,
+                        "prevailingVisSm": 6.0,
+                        "prevailingVisDistanceQualifier": 1
+                    },
+                    "wind": {
+                        "speedKts": 8.0,
+                        "direction": 60,
+                        "from": 60,
+                        "variable": false
+                    },
+                    "period": {
+                        "dateStart": "2022-10-11T18:00:00+0000",
+                        "dateEnd": "2022-10-11T21:00:00+0000"
+                    }
+                }
+            ]
         }
     }
 }
@@ -75,19 +180,68 @@ fileprivate let weatherReportTestInput = """
 
 fileprivate let weatherConditionsTestInput = """
 {
-    "text": "KPWM 091551Z 28012KT 10SM SCT060 SCT200 12/03 A3000 RMK AO2 SLP158 T01170028",
-    "ident": "kpwm",
-    "dateIssued": "2022-10-09T15:51:00+0000",
-    "lat": 43.64564406983302,
-    "lon": -70.30861611249378,
-    "elevationFt": 76.0,
-    "tempC": 12.0,
-    "dewpointC": 3.0,
-    "pressureHg": 30.0,
-    "pressureHpa": 1015.959,
-    "reportedAsHpa": false,
-    "densityAltitudeFt": -240,
-    "relativeHumidity": 54,
-    "flightRules": "vfr",
+     "text": "METAR KORL 111953Z AUTO 04007KT 10SM FEW040 SCT048 31/21 A3009 RMK AO2 SLP192 T03060211",
+     "ident": "korl",
+     "dateIssued": "2022-10-11T19:53:00+0000",
+     "lat": 28.545462045672732,
+     "lon": -81.33293013013267,
+     "elevationFt": 113.0,
+     "tempC": 31.0,
+     "dewpointC": 21.0,
+     "pressureHg": 30.09,
+     "pressureHpa": 1019.0068769999999,
+     "reportedAsHpa": false,
+     "densityAltitudeFt": 2113,
+     "relativeHumidity": 55,
+     "autonomous": true,
+     "flightRules": "vfr",
+     "cloudLayers": [
+         {
+             "coverage": "few",
+             "altitudeFt": 4000.0,
+             "ceiling": false
+         },
+         {
+             "coverage": "sct",
+             "altitudeFt": 4800.0,
+             "ceiling": false
+         }
+     ],
+     "cloudLayersV2": [
+         {
+             "coverage": "few",
+             "altitudeFt": 4000.0,
+             "ceiling": false
+         },
+         {
+             "coverage": "sct",
+             "altitudeFt": 4800.0,
+             "ceiling": false
+         }
+     ],
+     "weather": [],
+     "visibility": {
+         "distanceSm": 10.0,
+         "prevailingVisSm": 10.0
+     },
+     "wind": {
+         "speedKts": 7.0,
+         "direction": 40,
+         "from": 40,
+         "variable": false
+     },
+     "remarks": {
+         "precipitationDiscriminator": true,
+         "humanObserver": false,
+         "seaLevelPressure": 1019.2,
+         "temperature": 30.6,
+         "dewpoint": 21.1,
+         "visibility": {},
+         "sensoryStatus": [],
+         "lightning": [],
+         "weatherBeginEnds": {},
+         "clouds": [],
+         "obscuringLayers": []
+     }
 }
 """.data(using: .utf8)!
